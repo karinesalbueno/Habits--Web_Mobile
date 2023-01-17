@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [],
+  content: [
+    // estilização em todos os arquivos terminados em tsx na pasta src
+    './src/**/*.tsx',
+    './index.html'
+  ],
   theme: {
     extend: {},
   },

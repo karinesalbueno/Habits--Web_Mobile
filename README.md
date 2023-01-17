@@ -1,6 +1,6 @@
 * typescript
 * node.js
 * fastify
+* vite
 
-
-npx primsa studio
+npx prisma studio

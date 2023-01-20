@@ -21,7 +21,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>hello word *-*</Text>
+      <Text style={styles.text}>hello word *-*</Text>
       <StatusBar style="auto" />
     </View>
   );
@@ -30,8 +30,12 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
+    backgroundColor: '#09090A',
     justifyContent: 'center',
   },
+  text: {
+    color: '#fff',
+    fontFamily: 'Inter_800ExtraBold'
+  }
 });

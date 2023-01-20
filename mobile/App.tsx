@@ -1,5 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, StatusBar} from 'react-native';
 import { useFonts, Inter_400Regular, Inter_600SemiBold, Inter_700Bold, Inter_800ExtraBold } from '@expo-google-fonts/inter'
 import { Loading } from './src/assets/components/Loading';
 
@@ -22,7 +21,8 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>hello word *-*</Text>
-      <StatusBar style="auto" />
+      {/* exibe a barra de cima do celular */}
+      <StatusBar barStyle="light-content" />
     </View>
   );
 }

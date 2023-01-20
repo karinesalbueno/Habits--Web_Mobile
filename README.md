@@ -6,6 +6,8 @@
 * tailwind css
 * expo
 
+npx prisma migrate dev: cria as migrations
+
 to run bd:
 npx prisma studio
 

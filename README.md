@@ -5,6 +5,7 @@
 * react native
 * tailwind css
 * expo
+* radix ui - acessibilidade
 * nativeWind no react native para utilizar tailwind
 
 * react-native-svg

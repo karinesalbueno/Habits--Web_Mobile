@@ -5,6 +5,7 @@
 * react native
 * tailwind css
 * expo
+* nativeWind no react native para utilizar tailwind
 
 npx prisma migrate dev: cria as migrations
 

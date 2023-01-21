@@ -5,9 +5,10 @@
 * react native
 * tailwind css
 * expo
-
+* radix ui - acessibilidade
+* nativeWind no react native para utilizar tailwind
 * axios
-
+* react-native-svg
 npx prisma migrate dev: cria as migrations
 
 to run bd:

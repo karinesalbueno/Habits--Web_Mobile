@@ -6,6 +6,8 @@
 * tailwind css
 * expo
 
+* axios
+
 npx prisma migrate dev: cria as migrations
 
 to run bd:

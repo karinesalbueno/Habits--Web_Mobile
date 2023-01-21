@@ -3,10 +3,17 @@ module.exports = {
   content: [
     // estilização em todos os arquivos terminados em tsx na pasta src
     './src/**/*.tsx',
-    './index.html'
+    './index.html',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        bg: '#09090A',
+      },
+      gridTemplateRows: {
+        7: 'repeat(7, minmax(0, 1fr))',
+      }
+    },
   },
   plugins: [],
 }

@@ -2,13 +2,12 @@ interface HabitProps {
     completed: number
 }
 
-export function Habit(props: HabitProps) {
+// export function Habit(props: HabitProps) {
+export function Habit() {
     return (
         <div
-            className='
-        bg-zinc-900 text-white
-        w-10 h-10 rounded m-2 text-center flex items-center justify-center'>
-            {props.completed}
+            className="w-10 h-10 bg-zinc-900 border border-zinc-800 rounded-lg
+            ">
         </div>
     )
 }

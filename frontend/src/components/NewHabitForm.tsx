@@ -16,15 +16,29 @@ const availableWeekDays = [
 export function NewHabitForm() {
 
     const [title, setTitle] = useState('');
-    
-    const createNewHabit = (event: FormEvent) =>{
+    //array numérico
+    const [days, setDays] = useState<number[]>([]);
+
+    const createNewHabit = (event: FormEvent) => {
         event.preventDefault();
     }
 
+    const handleToggleWeekDay = (weekday: number) => {
+        if (days.includes(weekday)) {
+            const weekDaysWithRemovedOne = days.filter(day => day !== weekday)
+
+            setDays(weekDaysWithRemovedOne)
+        } else {
+            const weekDaysWithAddOne = [...days, weekday]
+
+            setDays(weekDaysWithAddOne)
+        }
+    }
+
     return (
-        <form 
-        className="w-full flex flex-col mt-6"
-        onSubmit={createNewHabit}>
+        <form
+            className="w-full flex flex-col mt-6"
+            onSubmit={createNewHabit}>
 
             <label htmlFor="title" className="font-semibold leading-tight">
                 Qual seu comprometimento?
@@ -44,11 +58,12 @@ export function NewHabitForm() {
 
             <div className="flex flex-col">
 
-                {availableWeekDays.map(weekday => {
+                {availableWeekDays.map((weekday, i) => {
                     return (
                         <Checkbox.Root
                             key={weekday}
-                            className='flex items-center gap-3 group p-1'>
+                            className='flex items-center gap-3 group p-1'
+                            onCheckedChange={() => handleToggleWeekDay(i)}>
 
                             <div className='h-8 w-8 rounded-lg flex items-center justify-center bg-zinc-900 border-2 border-zinc-800 group-data-[state=checked]:bg-green-500 group-data-[state=checked]:border-green-50'>
                                 <Checkbox.Indicator>

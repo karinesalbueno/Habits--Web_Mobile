@@ -1,7 +1,8 @@
-import dayjs from "dayjs";
 import { useEffect, useState } from "react";
-import { api } from '../../../backend/src/lib/axios'
+import dayjs from "dayjs";
 import { generateDatesFromYearBegining } from "../utils/generateDates"
+
+import { api } from '../lib/axios'
 import Habit from "./Habit"
 
 type Summary = {

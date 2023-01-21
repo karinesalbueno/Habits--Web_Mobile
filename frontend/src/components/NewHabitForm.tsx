@@ -29,7 +29,10 @@ export function NewHabitForm() {
             title: title,
             weekDays: days
         })
-
+        
+        setTitle('');
+        setDays([]);
+        
         alert('hábito criado')
     }
 
@@ -59,6 +62,7 @@ export function NewHabitForm() {
                 id="title"
                 placeholder="ex.: exercício, estudo, alimentação..."
                 autoFocus
+                value={title}
                 onChange={event => setTitle(event.target.value)}
             />
 
@@ -73,7 +77,8 @@ export function NewHabitForm() {
                         <Checkbox.Root
                             key={weekday}
                             className='flex items-center gap-3 group p-1'
-                            onCheckedChange={() => handleToggleWeekDay(i)}>
+                            onCheckedChange={() => handleToggleWeekDay(i)}
+                            checked={days.includes(i)}>
 
                             <div className='h-8 w-8 rounded-lg flex items-center justify-center bg-zinc-900 border-2 border-zinc-800 group-data-[state=checked]:bg-green-500 group-data-[state=checked]:border-green-50'>
                                 <Checkbox.Indicator>

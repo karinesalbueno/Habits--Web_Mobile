@@ -32,11 +32,14 @@ export function SummaryTable() {
                     )
                 })}
                 {/* Array.from: faz o array a partir do numero */}
-                {amountOfDaysToFill > 0 && Array.from({ length: amountOfDaysToFill }).map(() => {
+                {amountOfDaysToFill > 0 && Array.from({ length: amountOfDaysToFill }).map((_, i) => {
                     return (
                         <div
-                            className="w-10 h-10 bg-zinc-900 border border-zinc-800 rounded-lg
-            opacity-40 cursor-not-allowed"/>
+                            key={i}
+                            className="w-10 h-10
+                             bg-zinc-900 border border-zinc-800 rounded-lg
+                            opacity-40 cursor-not-allowed"
+                        />
                     )
                 })}
             </div>

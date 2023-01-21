@@ -5,6 +5,7 @@
 * react native
 * tailwind css
 * expo
+* radix ui - acessibilidade
 
 npx prisma migrate dev: cria as migrations
 

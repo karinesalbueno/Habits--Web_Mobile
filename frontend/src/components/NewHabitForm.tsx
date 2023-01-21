@@ -1,3 +1,5 @@
+import { FormEvent, useState } from 'react';
+
 import * as Checkbox from '@radix-ui/react-checkbox'
 import { Check } from "phosphor-react";
 
@@ -12,17 +14,28 @@ const availableWeekDays = [
 ];
 
 export function NewHabitForm() {
+
+    const [title, setTitle] = useState('');
+    
+    const createNewHabit = (event: FormEvent) =>{
+        event.preventDefault();
+    }
+
     return (
-        <form className="w-full flex flex-col mt-6">
+        <form 
+        className="w-full flex flex-col mt-6"
+        onSubmit={createNewHabit}>
+
             <label htmlFor="title" className="font-semibold leading-tight">
                 Qual seu comprometimento?
             </label>
 
             <input type="text"
+                className="p-4 rounded-lg mt-3 bg-zinc-800 text-white placehoder:text-zinc-400"
                 id="title"
                 placeholder="ex.: exercício, estudo, alimentação..."
                 autoFocus
-                className="p-4 rounded-lg mt-3 bg-zinc-800 text-white placehoder:text-zinc-400"
+                onChange={event => setTitle(event.target.value)}
             />
 
             <label htmlFor="" className="font-semibold leading-tight mt-4">

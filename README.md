@@ -5,7 +5,9 @@
 * react native
 * tailwind css
 * expo
+* nativeWind no react native para utilizar tailwind
 
+* react-native-svg
 npx prisma migrate dev: cria as migrations
 
 to run bd:

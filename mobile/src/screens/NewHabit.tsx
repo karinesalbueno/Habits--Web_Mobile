@@ -1,5 +1,6 @@
 import { ScrollView, View, Text, TextInput } from "react-native";
 import { BackButton } from "../assets/components/BackButton";
+import { CheckBox } from "../assets/components/Checkbox";
 
 export function NewHabit() {
     return (
@@ -20,6 +21,8 @@ export function NewHabit() {
 
                 <TextInput
                     className="h-12 pl-4 rounded-lg mt-3 bg-zinc-800 text-white focus:border-2 focus:border-green-600" />
+
+                <CheckBox title="Beber água"/>
             </ScrollView>
         </View>
     )

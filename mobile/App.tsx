@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View, StatusBar} from 'react-native';
+import { StatusBar } from 'react-native';
 import { useFonts, Inter_400Regular, Inter_600SemiBold, Inter_700Bold, Inter_800ExtraBold } from '@expo-google-fonts/inter'
 import { Loading } from './src/assets/components/Loading';
+import { Home } from './src/screens/Home';
 
 export default function App() {
   // fontsLoader: se a fonte está ou não carregada no dispositivo
@@ -19,23 +20,10 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>hello word *-*</Text>
+    <>
+      <Home />
       {/* exibe a barra de cima do celular */}
       <StatusBar barStyle="light-content" />
-    </View>
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#09090A',
-    justifyContent: 'center',
-  },
-  text: {
-    color: '#fff',
-    fontFamily: 'Inter_800ExtraBold'
-  }
-});

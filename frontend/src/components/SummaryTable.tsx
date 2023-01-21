@@ -1,5 +1,15 @@
+import dayjs from "dayjs";
+import { useEffect, useState } from "react";
+import { api } from '../../../backend/src/lib/axios'
 import { generateDatesFromYearBegining } from "../utils/generateDates"
 import Habit from "./Habit"
+
+type Summary = {
+    id: string;
+    date: string;
+    amount: number;
+    completed: number;
+}[]
 
 const weekDays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
 
@@ -9,6 +19,14 @@ const minimumSummaryDatesSize = 18 * 7;
 const amountOfDaysToFill = minimumSummaryDatesSize - SummaryDates.length;
 
 export function SummaryTable() {
+    const [summary, setSummary] = useState<Summary>([])
+
+    useEffect(() => {
+        api.get('summary').then((res: { data: any; }) => {
+            setSummary(res.data)
+        })
+    }, [])
+
     return (
         <div className="w-full flex">
             <div className="grid grid-rows-7 grid-flow-row gap-3">
@@ -27,10 +45,17 @@ export function SummaryTable() {
             <div
                 className="grid grid-rows-7 grid-flow-col gap-3">
                 {SummaryDates.map(date => {
+                    //verificar se o dia q está percorrendo está dentro do retorno do back
+                    const dayInSummary = summary.find(day => {
+                        //validando se apenas a data q está sendo percorrida é igual a alguma data q está presente no retorno
+                        return dayjs(date).isSame(day.date, 'day')
+                    })
+
                     return (
                         <Habit
-                            amount={5}
-                            completed={Math.round(Math.random() * 5)}
+                            date={date}
+                            amount={dayInSummary?.amount}
+                            completed={dayInSummary?.completed}
                             key={date.toString()} />
                     )
                 })}

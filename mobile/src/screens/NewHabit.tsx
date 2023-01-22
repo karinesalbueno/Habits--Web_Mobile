@@ -4,13 +4,13 @@ import { Feather } from "@expo/vector-icons";
 
 import { BackButton } from "../assets/components/BackButton";
 import { CheckBox } from "../assets/components/Checkbox";
-import { Colors } from "react-native/Libraries/NewAppScreen";
 import colors from "tailwindcss/colors";
 
 const availableWeekDays = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
 
 export function NewHabit() {
     const [weekDays, setWeekDays] = useState<Number[]>([])
+    const [title, setTitle] = useState('')
 
     const handleToggleWeekDay = (weekDayIndex: number) => {
         if (weekDays.includes(weekDayIndex)) {
@@ -38,9 +38,11 @@ export function NewHabit() {
                 </Text>
 
                 <TextInput
+                    className="h-12 pl-4 rounded-lg mt-3 bg-zinc-800 text-white focus:border-2 focus:border-green-600"
                     placeholder="ex.: exercícios, estudos, alimentação..."
                     placeholderTextColor={colors.zinc[400]}
-                    className="h-12 pl-4 rounded-lg mt-3 bg-zinc-800 text-white focus:border-2 focus:border-green-600" />
+                    value={title}
+                    onChangeText={setTitle} />
 
                 <Text className="mt-4 mb-3 font-semibold text-white text-base">
                     Qual a recorrência?

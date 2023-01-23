@@ -40,7 +40,7 @@ export function Habit({ completed = 0, amount = 0, date }: HabitDayProps) {
                     <span className='mt-1 font-bold leading-tight text-1xl'>{dayAndMonth}</span>
                     <ProgressBar progress={40} />
 
-                    <HabitsList />
+                    <HabitsList date={date} />
 
                     <Popover.Arrow
                         height={8}

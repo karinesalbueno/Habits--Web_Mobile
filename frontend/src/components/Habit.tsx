@@ -4,15 +4,17 @@ import dayjs from 'dayjs';
 
 import { ProgressBar } from './ProgressBar';
 import { HabitsList } from './HabitsList';
+import { useState } from 'react';
 
 interface HabitDayProps {
     date: Date,
-    completed?: number,
+    defaultCompleted?: number,
     amount?: number
 }
 
 //inicando com 0 qnd não tiver dado
-export function Habit({ completed = 0, amount = 0, date }: HabitDayProps) {
+export function Habit({ defaultCompleted = 0, amount = 0, date }: HabitDayProps) {
+    const [completed, setCompleted] = useState(defaultCompleted)
 
     const completdPercentage = amount > 0 ? Math.round((completed / amount) * 100) : 0;
 
@@ -20,6 +22,10 @@ export function Habit({ completed = 0, amount = 0, date }: HabitDayProps) {
     const dayAndMonth = dayjs(date).format('DD/MM');
     //dia da semana
     const dayOfWeek = dayjs(date).format('dddd');
+
+    const handleCompletedChaged = (completed: number) => {
+        setCompleted(completed)
+    }
 
     return (
         <Popover.Root>
@@ -38,9 +44,9 @@ export function Habit({ completed = 0, amount = 0, date }: HabitDayProps) {
                     className='min-w-[320px] p-6 rounded-2xl bg-zinc-900 flex flex-col'>
                     <span className='font-semibold text-zinc-400'> {dayOfWeek} </span>
                     <span className='mt-1 font-bold leading-tight text-1xl'>{dayAndMonth}</span>
-                    <ProgressBar progress={40} />
+                    <ProgressBar progress={completdPercentage} />
 
-                    <HabitsList date={date} />
+                    <HabitsList date={date} onCompletedChanged={handleCompletedChaged} />
 
                     <Popover.Arrow
                         height={8}

@@ -5,7 +5,11 @@ import * as Checkbox from "@radix-ui/react-checkbox";
 import { api } from "../lib/axios";
 import dayjs from "dayjs";
 
-interface HabitsListProps { date: Date }
+interface HabitsListProps {
+    date: Date;
+    onCompletedChanged: (completed: number) => void
+
+}
 
 interface HabitsInfo {
     possibleHabits: {
@@ -16,7 +20,7 @@ interface HabitsInfo {
     completedHabits: string[];
 }
 
-export function HabitsList({ date }: HabitsListProps) {
+export function HabitsList({ date, onCompletedChanged }: HabitsListProps) {
     const [habitsInfo, setHabitsInfo] = useState<HabitsInfo>()
 
     useEffect(() => {
@@ -46,6 +50,9 @@ export function HabitsList({ date }: HabitsListProps) {
             completedHabits = [...habitsInfo!.completedHabits, habitId]
         }
         setHabitsInfo({ possibleHabits: habitsInfo!.possibleHabits, completedHabits })
+
+        onCompletedChanged(completedHabits.length)
+
     }
 
     return (

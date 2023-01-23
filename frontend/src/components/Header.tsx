@@ -14,7 +14,7 @@ export function Header() {
           type="button"
           className='border border-violet-500 font-semibold 
             rounded-lg px-6 py-4
-            flex items-center gap-3 hover:border-violet-300'
+            flex items-center gap-3 hover:border-violet-300 transition-colors'
         >
           <img src={logoPlus} alt='plus' className='text-violet-500' />
           novo hábito

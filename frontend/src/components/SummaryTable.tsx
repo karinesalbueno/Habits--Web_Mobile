@@ -45,21 +45,23 @@ export function SummaryTable() {
 
             <div
                 className="grid grid-rows-7 grid-flow-col gap-3">
-                {SummaryDates.map(date => {
-                    //verificar se o dia q está percorrendo está dentro do retorno do back
-                    const dayInSummary = summary.find(day => {
-                        //validando se apenas a data q está sendo percorrida é igual a alguma data q está presente no retorno
-                        return dayjs(date).isSame(day.date, 'day')
-                    })
+                {
+                    summary.length > 0 &&
+                    SummaryDates.map(date => {
+                        //verificar se o dia q está percorrendo está dentro do retorno do back
+                        const dayInSummary = summary.find(day => {
+                            //validando se apenas a data q está sendo percorrida é igual a alguma data q está presente no retorno
+                            return dayjs(date).isSame(day.date, 'day')
+                        })
 
-                    return (
-                        <Habit
-                            date={date}
-                            amount={dayInSummary?.amount}
-                            completed={dayInSummary?.completed}
-                            key={date.toString()} />
-                    )
-                })}
+                        return (
+                            <Habit
+                                date={date}
+                                amount={dayInSummary?.amount}
+                                defaultCompleted={dayInSummary?.completed}
+                                key={date.toString()} />
+                        )
+                    })}
                 {/* Array.from: faz o array a partir do numero */}
                 {amountOfDaysToFill > 0 && Array.from({ length: amountOfDaysToFill }).map((_, i) => {
                     return (

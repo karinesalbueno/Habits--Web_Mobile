@@ -9,6 +9,8 @@ import { ProgressBar } from "../assets/components/ProgressBar";
 import { CheckBox } from "../assets/components/Checkbox";
 import { Loading } from "../assets/components/Loading";
 
+import { generateProgressPercentage } from '../utils/generate-percentagem'
+
 interface Params { date: string }
 interface DayInfoProps {
     possibleHabits: {
@@ -30,6 +32,11 @@ export function Habit() {
     const dayOfWeek = parsedDate.format('dddd');
     const dayAndMonth = parsedDate.format('DD/MM')
 
+    const habitProgress =
+        dayInfo?.possibleHabits.length ?
+            generateProgressPercentage(dayInfo.possibleHabits.length, completedHabits.length)
+            : 0;
+
     const fetchHabits = async () => {
         try {
             setLoading(true)
@@ -46,6 +53,14 @@ export function Habit() {
             Alert.alert('ops..', 'não foi possível carregar as informações :(')
         } finally {
             setLoading(false)
+        }
+    }
+
+    const handleToggleHabit = async (habitId: string) => {
+        if (completedHabits.includes(habitId)) {
+            setCompletedHabits(prevState => prevState.filter(habit => habit !== habitId))
+        } else {
+            setCompletedHabits(prevState => [...prevState, habitId])
         }
     }
 
@@ -71,7 +86,7 @@ export function Habit() {
                     {dayAndMonth}
                 </Text>
 
-                <ProgressBar progress={30} />
+                <ProgressBar progress={habitProgress} />
 
                 <View className="mt-6">
                     {
@@ -80,7 +95,8 @@ export function Habit() {
                             <CheckBox
                                 key={habit.id}
                                 title={habit.title}
-                                checked={completedHabits.includes(habit.id)} />
+                                checked={completedHabits.includes(habit.id)}
+                                onPress={() => handleToggleHabit(habit.id)} />
                         ))
                     }
                 </View>

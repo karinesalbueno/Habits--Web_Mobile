@@ -67,9 +67,10 @@ export async function appRoutes(app: FastifyInstance) {
       },
     });
 
-    const completedHabits = day?.dayHabits.map((dayHabit) => {
-      return dayHabit.habit_id;
-    });
+    const completedHabits =
+      day?.dayHabits.map((dayHabit) => {
+        return dayHabit.habit_id;
+      }) ?? [];
 
     return {
       possibleHabits,
@@ -149,12 +150,5 @@ export async function appRoutes(app: FastifyInstance) {
         },
       });
     }
-
-    await prisma.dayHabit.create({
-      data: {
-        day_id: day.id,
-        habit_id: id,
-      },
-    });
   });
 }

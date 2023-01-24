@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRoute } from "@react-navigation/native";
 import { ScrollView, View, Text, Alert } from "react-native";
+import clsx from "clsx";
 import dayjs from "dayjs";
 
 import { api } from "../lib/axios";
@@ -11,7 +12,6 @@ import { Loading } from "../assets/components/Loading";
 
 import { generateProgressPercentage } from '../utils/generate-percentagem'
 import { HabitsEmpty } from "../assets/components/HabitEmpty";
-import clsx from "clsx";
 
 interface Params { date: string }
 interface DayInfoProps {

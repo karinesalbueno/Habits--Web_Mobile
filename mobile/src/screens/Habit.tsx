@@ -10,6 +10,7 @@ import { CheckBox } from "../assets/components/Checkbox";
 import { Loading } from "../assets/components/Loading";
 
 import { generateProgressPercentage } from '../utils/generate-percentagem'
+import { HabitsEmpty } from "../assets/components/HabitEmpty";
 
 interface Params { date: string }
 interface DayInfoProps {
@@ -32,11 +33,6 @@ export function Habit() {
     const dayOfWeek = parsedDate.format('dddd');
     const dayAndMonth = parsedDate.format('DD/MM')
 
-    const habitProgress =
-        dayInfo?.possibleHabits.length ?
-            generateProgressPercentage(dayInfo.possibleHabits.length, completedHabits.length)
-            : 0;
-
     const fetchHabits = async () => {
         try {
             setLoading(true)
@@ -46,7 +42,7 @@ export function Habit() {
             })
 
             setDayInfo(response.data)
-            setCompletedHabits(response.data.completedHabit)
+            setCompletedHabits(response.data.completedHabit ?? [])
 
         } catch (error) {
             console.log(error)
@@ -57,14 +53,24 @@ export function Habit() {
     }
 
     const handleToggleHabit = async (habitId: string) => {
-        if (completedHabits.includes(habitId)) {
-            setCompletedHabits(prevState => prevState.filter(habit => habit !== habitId))
-        } else {
-            setCompletedHabits(prevState => [...prevState, habitId])
+        try {
+            await api.patch(`/habits/${habitId}/toggle`);
+
+            if (completedHabits.includes(habitId)) {
+                setCompletedHabits(prevState => prevState.filter(habit => habit !== habitId))
+            } else {
+                setCompletedHabits(prevState => [...prevState, habitId])
+            }
+
+        } catch (error) {
+            console.log(error)
+            Alert.alert('Ops', 'Não foi possível atualizar o status do hábito.')
         }
     }
 
     useEffect(() => { fetchHabits() }, [])
+
+    const habitsProgress = dayInfo?.possibleHabits?.length ? generateProgressPercentage(dayInfo.possibleHabits.length, completedHabits.length) : 0
 
     if (loading) {
         return (<Loading />)
@@ -86,18 +92,19 @@ export function Habit() {
                     {dayAndMonth}
                 </Text>
 
-                <ProgressBar progress={habitProgress} />
+                <ProgressBar progress={habitsProgress} />
 
                 <View className="mt-6">
                     {
-                        dayInfo?.possibleHabits &&
-                        dayInfo.possibleHabits.map(habit => (
-                            <CheckBox
-                                key={habit.id}
-                                title={habit.title}
-                                checked={completedHabits.includes(habit.id)}
-                                onPress={() => handleToggleHabit(habit.id)} />
-                        ))
+                        dayInfo?.possibleHabits.length !== 0 ?
+                            dayInfo?.possibleHabits.map(habit => (
+                                <CheckBox
+                                    key={habit.id}
+                                    title={habit.title}
+                                    checked={completedHabits.includes(habit.id)}
+                                    onPress={() => handleToggleHabit(habit.id)} />
+                            ))
+                            : <HabitsEmpty />
                     }
                 </View>
             </ScrollView>

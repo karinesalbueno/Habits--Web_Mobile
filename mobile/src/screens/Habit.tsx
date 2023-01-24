@@ -44,7 +44,7 @@ export function Habit() {
             })
 
             setDayInfo(response.data)
-            setCompletedHabits(response.data.completedHabit ?? [])
+            setCompletedHabits(response.data.completedHabits ?? [])
 
         } catch (error) {
             console.log(error)
@@ -107,7 +107,7 @@ export function Habit() {
                                     key={habit.id}
                                     title={habit.title}
                                     disabled={isDateInPast}
-                                    checked={completedHabits.includes(habit.id)}
+                                    checked={completedHabits?.includes(habit.id)}
                                     onPress={() => handleToggleHabit(habit.id)} />
                             ))
                             : <HabitsEmpty />

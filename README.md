@@ -48,6 +48,13 @@ npx expo start
 run back-end and front-end: 
 npm run dev
 
+
+```
+adicionar arquivo .env na pasta backend:
+
+DATABASE_URL="file:./dev.db"
+```
+
 ## 🔖 Layout
 
 

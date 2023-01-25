@@ -55,6 +55,15 @@ adicionar arquivo .env na pasta backend:
 DATABASE_URL="file:./dev.db"
 ```
 
+```
+rotas:
+
+GET : localhost:3333/day
+GET : localhost:3333/summary
+PATCH : localhost:3333/habits/{id}/toggle
+POST : localhost:3333/habits
+```
+
 ## 🔖 Layout
 
 
